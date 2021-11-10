@@ -1,8 +1,19 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2021/11/10 11:17 AM
+# @Author  : dzdydx
+# @Affiliation  : 
+# @Email   : 
+# @File    : csv_to_xlsx.py
+
+# =========================
+#         Archived.
+# =========================
+
 import os
 import xlsxwriter
 from tqdm import tqdm
 
-g = open('../dataset/eval_segments.csv').read()
+g = open('../dataset/eval-labels.csv').read()
 h = g.split('\n')
 ids = list()
 starts = list()
@@ -30,7 +41,7 @@ worksheet.write('D1', 'Classes')
 
 print(len(ids), len(starts), len(ends), len(classes))
 
-for i in tqdm(range(len(ids)), desc='writing excelsheet'):
+for i in tqdm(range(len(ids) - 1), desc='writing excelsheet'):
     worksheet.write('A%s' % (str(i+2)), ids[i])
     worksheet.write('B%s' % (str(i+2)), starts[i])
     worksheet.write('C%s' % (str(i+2)), ends[i])

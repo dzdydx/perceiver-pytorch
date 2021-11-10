@@ -3,8 +3,13 @@ from perceiver_pytorch import Perceiver
 from torch.utils.data import DataLoader
 from dataset import Audioset
 
-training_data = Audioset(training_data_dir, training_labels)
-test_data = Audioset(test_data_dir, testing_labels)
+training_dir = '../dataset/train'
+evalset_dir = '../dataset/eval'
+training_labels = '../dataset/labels/train_segments.xlsx'
+testing_labels = '../dataset/labels/eval_segments.xlsx'
+
+training_data = Audioset(training_dir, training_labels)
+test_data = Audioset(evalset_dir, testing_labels)
 
 train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
 test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
@@ -37,7 +42,7 @@ model = Perceiver(
 ).to(device)
 
 loss_fn = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
+optimizer = torch.optim.SGD(model.parameters(), lr=4e-3)
 
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
